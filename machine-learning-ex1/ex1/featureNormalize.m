@@ -26,13 +26,9 @@ sigma = zeros(1, size(X, 2));
 % Hint: You might find the 'mean' and 'std' functions useful.
 %       
 
-
-
-
-
-
-
-
+sigma = std(X); % 1 X n matrix
+mu = mean(X); % 1 X n matrix
+X_norm = (X - mu) / sigma;
 
 % ============================================================
 
