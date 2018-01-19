@@ -28,7 +28,7 @@ sigma = zeros(1, size(X, 2));
 
 sigma = std(X); % 1 X n matrix
 mu = mean(X); % 1 X n matrix
-X_norm = (X - mu) / sigma;
+X_norm = (X .- mu) ./ sigma;
 
 % ============================================================
 
