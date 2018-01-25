@@ -28,13 +28,15 @@ X = [ones(m, 1) X];
 %       max element, for more information see 'help max'. If your examples 
 %       are in rows, then, you can use max(A, [], 2) to obtain the max 
 %       for each row.
-%       
+%
 
-
-
-
-
-
+% Some useful sizes:
+% size(all_theta) = num_labels, n+1      
+% size(X) = m,n+1
+% size(p) = m
+pred_prob = zeros(size(p));
+h_all = X * all_theta';
+[pred_prob,p] = max(h_all, [], 2);
 
 % =========================================================================
 
