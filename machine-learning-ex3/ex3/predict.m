@@ -48,7 +48,7 @@ end
 % The last layer_input is the final h
 % Remove the ones-feature from h
 h = layer_input(:,2:end);
-% Remove the ones-feature from h
+% Find the label with the max prob
 [prob,p] = max(h, [], 2);
 
 % =========================================================================
