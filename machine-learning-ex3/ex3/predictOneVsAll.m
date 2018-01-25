@@ -35,7 +35,7 @@ X = [ones(m, 1) X];
 % size(X) = m,n+1
 % size(p) = m
 pred_prob = zeros(size(p));
-h_all = X * all_theta';
+h_all = sigmoid(X * all_theta');
 [pred_prob,p] = max(h_all, [], 2);
 
 % =========================================================================
