@@ -90,7 +90,7 @@ J = J/m;
 
 
 % --------------------------------------------- Regularization
-J_reg = (lambda/(2*m)) * (sum((Theta1.^2)(:)) + sum((Theta2.^2)(:)));
+J_reg = (lambda/(2*m)) * (sum((Theta1(:,2:end).^2)(:)) + sum((Theta2(:,2:end).^2)(:)));
 J = J + J_reg;
 
 % --------------------------------------------- Backpropagation
