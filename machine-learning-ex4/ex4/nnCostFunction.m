@@ -62,22 +62,38 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+K = num_labels;
+
+% --------------------------------------------- Feedforward
+h1 = sigmoid([ones(m, 1) X] * Theta1');
+h = sigmoid([ones(m, 1) h1] * Theta2');
+
+% --------------------------------------------- Cost using loops 
+% For each training example
+% for i=1:m,
+% 	all_units_cost = 0; 
+% 	% For each output unit, compute the cost
+% 	for k=1:K,
+% 		% printf('k:%d, i:%d, y(i):%d, y(i)==k:%d, h_i_k:%d\n', k, i, y(i), y(i) == k, h(i,k));
+% 		k_unit_cost = - (y(i) == k) * log(h(i,k)) - (1 - (y(i) == k)) * log (1 - h(i,k));
+% 		all_units_cost = all_units_cost + k_unit_cost;
+% 	end
+% 	J = J + all_units_cost;
+% end
+% J = J/m;
+
+% --------------------------------------------- Cost using matrices
+labels = 1:K;
+y_v = y == labels; 
+J = sum((- y_v .* log(h) - (1-y_v) .* log(1-h))(:));
+J = J/m;
 
 
+% --------------------------------------------- Regularization
+J_reg = (lambda/(2*m)) * (sum((Theta1.^2)(:)) + sum((Theta2.^2)(:)));
+J = J + J_reg;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+% --------------------------------------------- Backpropagation
 
 
 % -------------------------------------------------------------
