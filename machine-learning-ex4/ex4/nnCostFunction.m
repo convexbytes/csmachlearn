@@ -93,8 +93,35 @@ J = J/m;
 J_reg = (lambda/(2*m)) * (sum((Theta1(:,2:end).^2)(:)) + sum((Theta2(:,2:end).^2)(:)));
 J = J + J_reg;
 
-% --------------------------------------------- Backpropagation
+% --------------------------------------------- Backpropagation using loops
 
+DELTA_l1 = zeros(size(Theta1));
+DELTA_l2 = zeros(size(Theta2));
+
+for i=1:m,
+	% 1 Forward propagation
+	a_1 = [1;X(i,:)'];
+	z_2 = Theta1 * a_1;
+	a_2 = [1;sigmoid(z_2)];
+	z_3 = Theta2 * a_2;
+	a_3 = sigmoid(z_3);
+	h_i = a_3;
+	
+	% 2 Back propagation 
+	% Layer 3 Error
+	delta_3 =  h_i - y_v(i,:)';
+	% Layer 2 Error
+	delta_2 = (Theta2' * delta_3) .* [1;sigmoidGradient(z_2)];
+	% Note that you should skip or remove δ_0(2)
+	delta_2 = delta_2(2:end);
+
+	% Accumulators
+	DELTA_l1 = DELTA_l1 + delta_2 * a_1';
+	DELTA_l2 = DELTA_l2 + delta_3 * a_2';
+end
+
+Theta1_grad = DELTA_l1 ./ m;
+Theta2_grad = DELTA_l2 ./ m;
 
 % -------------------------------------------------------------
 
