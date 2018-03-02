@@ -123,7 +123,12 @@ end
 Theta1_grad = DELTA_l1 ./ m;
 Theta2_grad = DELTA_l2 ./ m;
 
-% -------------------------------------------------------------
+% --------------------------------------------- Regularization
+
+reg_Theta1 = (lambda/m) * [zeros(size(Theta1, 1), 1) Theta1(:,2:end)];
+reg_Theta2 = (lambda/m) * [zeros(size(Theta2, 1), 1) Theta2(:,2:end)];
+Theta1_grad = Theta1_grad + reg_Theta1;
+Theta2_grad = Theta2_grad + reg_Theta2;
 
 % =========================================================================
 
