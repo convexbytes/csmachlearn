@@ -54,7 +54,19 @@ error_val   = zeros(m, 1);
 % ---------------------- Sample Solution ----------------------
 
 
-
+for i=1:m,
+	X_train = X(1:i, :);
+	Y_train = y(1:i, :);
+	% Train linear regression with the subset of the X
+	theta = trainLinearReg(X_train, Y_train, lambda);
+	% Compute the error of the subset with i elements
+	% pass lambda=0 (do not use regularization terms) for the errors of the learning curve
+	% error_train uses the subset x_train and y_train to compute the error 
+	[error_train(i), unused_grad] = linearRegCostFunction(X_train, Y_train, theta, 0);
+	% Compute the validation error,
+	% error_val uses the set Xval and yval, again pass lambda=0
+	[error_val(i), unused_grad] = linearRegCostFunction(Xval, yval, theta, 0);
+end
 
 
 
